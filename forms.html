@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forms</title>
+    <link rel="stylesheet" href="./index.css">
+    <script type="text/javascript" src="./forms.js"></script>
+</head>
+
+<body>
+    <div class="form">
+        <img src="./assets/b-WhiteLogo-BGlb.png" alt="bionexo logo" class="logo">
+        <div class="title">Welcome</div>
+        <div class="subtitle">Crie sua conta</div>
+        <div class="errors" id="errors"></div>
+        <div class="input-container ic1">
+            <input type="text" name="firstname" id="firstname" placeholder=" " class="input" autocomplete="off">
+            <div class="cut"></div>
+            <label for="firstname" class="placeholder">Nome</label>
+            <p class="error-message" id="firstname-error"></p>
+        </div>
+        <div class="input-container ic2">
+            <input type="text" name="lastname" class="input" id="lastname" placeholder=" " autocomplete="off">
+            <div class="cut cut-long"></div>
+            <label for="lastname" class="placeholder">Sobrenome</label>
+            <p class="error-message" id="lastname-error"></p>
+        </div>
+        <div class="input-container ic2">
+            <input type="email" name="email" class="input" id="email" placeholder=" " autocomplete="off">
+            <div class="cut"></div>
+            <label for="email" class="placeholder">E-mail</label>
+            <p class="error-message" id="email-error"></p>
+        </div>
+        <div class="input-container ic2">
+            <input type="password" name="password" id="password" placeholder=" " class="input" autocomplete="off">
+            <div class="cut"></div>
+            <label for="password" class="placeholder">Senha</label>
+        </div>
+        <div class="input-container ic2">
+            <input type="password" name="comfirm-password" id="comfirm-password" placeholder=" " class="input"
+                autocomplete="off">
+            <div class="cut cut-long"></div>
+            <label for="comfirm-password" class="placeholder">Confime sua senha</label>
+            <p class="error-message" id="password-error"></p>
+        </div>
+        <button type="submit" class="submit" onclick=handleSubmit()>Cadastrar</button>
+    </div>
+</body>
+
+</html>
