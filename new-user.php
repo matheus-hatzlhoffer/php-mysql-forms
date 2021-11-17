@@ -1,48 +1,29 @@
 <?php 
 
-  // while (true) {
-  //   # code...
-  // }
+  include('config/db_connect.php');
 
-  $contentType = isset($_SERVER["CONTENT_TYPE"]) ? trim($_SERVER["CONTENT_TYPE"]) : '';
+  $data = json_decode(file_get_contents('php://input'), true);
 
-  if ($contentType === "application/json") {
-    //Receive the RAW post data.
-    $content = trim(file_get_contents("php://input"));
+  if(!$data){
+    echo "ERROR GETTTING THE DATA";
+  } else {
 
-    $decoded = json_decode($content, true);
+    $firstName = mysqli_real_escape_string($conn, $data["firstname"]);
+    $lastName = mysqli_real_escape_string($conn, $data["lastname"]);
+    $email = mysqli_real_escape_string($conn, $data["email"]);
+    $password = mysqli_real_escape_string($conn, $data["password"]);
 
-    //If json_decode failed, the JSON is invalid.
-    if(! is_array($decoded)) {
-      echo $content,  "<br />";
-    } else {
-      // Send error back to user.
+    $sql = "INSERT INTO users(firstname, lastname, email, password) VALUES('$firstName', '$lastName', '$email', '$password')";
+
+    //save to db
+    if(mysqli_query($conn, $sql)){
+      // success
+      header('Location: index.php');
+    }else{
+      echo 'ERROR IN DATABASE ' + mysqli_error($conn); 
     }
-  } 
-?>
+  }
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Users</title>
-</head>
-<body>
-  <section >
-		<h4 >Add a Pizza</h4>
-		<form action="new-user.php" method="POST">
-			<label>Your Email</label>
-			<input type="text" name="email">
-			<label>Pizza Title</label>
-			<input type="text" name="title">
-			<label>Ingredients (comma separated)</label>
-			<input type="text" name="ingredients">
-			<div >
-				<input type="submit" name="submit" value="Submit">
-			</div>
-		</form>
-	</section>
-</body>
-</html>
+  include('config/db_disconnect.php');
+
+?>

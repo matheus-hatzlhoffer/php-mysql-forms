@@ -77,7 +77,7 @@ function handleSubmit() {
         validate = false;
     }
 
-    if (true) {
+    if (validate) {
         const url = "new-user.php";
         const request = new Request(url, {
             method: "POST",
@@ -85,7 +85,6 @@ function handleSubmit() {
                 'content-type': 'application/json',
                 'Accept': 'application/json'
             }),
-            mode: 'cors',
             body: JSON.stringify({
                 firstname: firstname.value,
                 lastname: lastname.value,
@@ -96,33 +95,12 @@ function handleSubmit() {
         if (request.headers.get("content-type") === 'application/json') {
             fetch(request).then(response => {
                 if (response.ok) {
-                    console.log("foi");
-                    // location.assign("new-user.php");
+                    location.assign("/forms");
                 }
             }).catch(error => {
                 alert(error);
             });
 
         }
-        // fetch(url, {
-        //     headers: new Headers({
-        //         'content-type': 'application/json'
-        //     }),
-        //     method: "POST",
-        //     body: JSON.stringify({
-        //         firstname: firstname.value,
-        //         lastname: lastname.value,
-        //         email: email.value,
-        //         password: password.value,
-        //     }),
-        //     mode: 'no-cors'
-        // }).then(response => {
-        //     if (response.ok) {
-        //         console.log("foi");
-        //         location.assign("new-user.php");
-        //     }
-        // }).catch((error) => {
-        //     alert(error);
-        // });
     }
 }
